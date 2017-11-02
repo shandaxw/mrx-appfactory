@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrx.appfactory.cfgtool.dao.IConfigToolDao">
+
+	<select id="getConfigCountByNo" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(id) from config_tool where
+		api_no=#{apiNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getConfigTotal" parameterType="com.mrx.appfactory.cfgtool.formbean.ConfigListFb"
+		resultType="java.lang.Integer">
+		select count(id) from config_tool where 1=1
+		<if test="apiNo != null">
+			and api_no like #{apiNo,jdbcType=VARCHAR}
+		</if>
+		<if test="apiName != null">
+			and api_name like #{apiName,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="getConfigList" parameterType="com.mrx.appfactory.cfgtool.formbean.ConfigListFb"
+		resultType="com.mrx.appfactory.cfgtool.entity.ConfigEntity">
+		select id,api_name apiName,api_no apiNo,json_data
+		jsonData,json_string
+		jsonString from
+		config_tool where 1=1
+		<if test="apiNo != null">
+			and api_no like #{apiNo,jdbcType=VARCHAR}
+		</if>
+		<if test="apiName != null">
+			and api_name like #{apiName,jdbcType=VARCHAR}
+		</if>
+		limit
+		#{offset,jdbcType=NUMERIC},#{rows,jdbcType=NUMERIC}
+	</select>
+
+	<select id="getConfigByNo" parameterType="java.lang.String"
+		resultType="com.mrx.appfactory.cfgtool.entity.ConfigEntity">
+		select id,api_name apiName,api_no apiNo,json_data
+		jsonData,json_string jsonString from
+		config_tool where
+		api_no=#{apiNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getJsonDataByNo" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select json_data jsonData from
+		config_tool where
+		api_no=#{apiNo,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addConfig" parameterType="com.mrx.appfactory.cfgtool.entity.ConfigEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into config_tool
+		<trim prefixOverrides="," suffixOverrides="," suffix=")" prefix="(">
+			api_name,api_no,json_data,json_string,
+		</trim>
+		<trim prefixOverrides="," suffixOverrides="," suffix=")" prefix="values (">
+			#{apiName,jdbcType=VARCHAR},
+			#{apiNo,jdbcType=VARCHAR},
+			#{jsonData,jdbcType=LONGVARCHAR},
+			#{jsonString,jdbcType=LONGVARCHAR},
+		</trim>
+	</insert>
+
+	<update id="updateConfig" parameterType="com.mrx.appfactory.cfgtool.entity.ConfigEntity">
+		update config_tool set
+		api_name=#{apiName,jdbcType=VARCHAR},json_data=#{jsonData,jdbcType=LONGVARCHAR},json_string=#{jsonString,jdbcType=LONGVARCHAR}
+		where api_no=#{apiNo,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteConfig" parameterType="java.lang.Long">
+		delete from config_tool
+		where id=#{id,jdbcType=NUMERIC}
+	</delete>
+
+</mapper>
