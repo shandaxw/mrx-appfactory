@@ -417,15 +417,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.csource</groupId>
-			<artifactId>fastdfs-client-java</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.eclipse.jgit</groupId>
 			<artifactId>org.eclipse.jgit</artifactId>
 		</dependency>
-
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
