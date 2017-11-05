@@ -155,7 +155,7 @@ public class ConfigToolServiceImpl implements IConfigToolService {
      * @throws Exception
      */
     private void transferFile(FileItem item, String fileName) throws Exception {
-        String path = "~/files/mrx-cfgtool";
+        String path = "/use/local/src";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdir();
