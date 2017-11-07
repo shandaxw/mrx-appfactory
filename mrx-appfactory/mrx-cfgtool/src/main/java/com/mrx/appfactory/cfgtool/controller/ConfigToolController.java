@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.mrx.appfactory.cfgtool.entity.ConfigEntity;
 import com.mrx.appfactory.cfgtool.formbean.ConfigListFb;
 import com.mrx.appfactory.cfgtool.service.IConfigToolService;
@@ -104,13 +103,13 @@ public class ConfigToolController extends CfgToolBaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(HttpServletRequest request) throws Exception {
+    public APIResult save(HttpServletRequest request) throws Exception {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
         List<FileItem> items = upload.parseRequest(request);
         iConfigToolService.addConfig(items);
-        return JSON.toJSONString(APIResult.getResult(APIResults.SUCCESS));
+        return APIResult.getResult(APIResults.SUCCESS);
     }
 
     /**
@@ -123,13 +122,13 @@ public class ConfigToolController extends CfgToolBaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(HttpServletRequest request) throws Exception {
+    public APIResult update(HttpServletRequest request) throws Exception {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
         List<FileItem> items = upload.parseRequest(request);
         iConfigToolService.updateConfig(items);
-        return JSON.toJSONString(APIResult.getResult(APIResults.SUCCESS));
+        return APIResult.getResult(APIResults.SUCCESS);
     }
 
     /**
