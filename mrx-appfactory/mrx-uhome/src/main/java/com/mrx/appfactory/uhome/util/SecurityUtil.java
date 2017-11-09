@@ -1,11 +1,11 @@
 package com.mrx.appfactory.uhome.util;
 
-import java.net.URLEncoder;
-import java.security.MessageDigest;
+import java.net.URLDecoder;
 import java.util.Date;
 
 import com.mrx.appfactory.common.core.APIException;
 import com.mrx.appfactory.common.core.APIResults;
+import com.mrx.appfactory.common.util.DES;
 import com.mrx.appfactory.uhome.entity.SignEntity;
 
 /**
@@ -27,10 +27,8 @@ public class SecurityUtil {
      * @throws Exception 
      */
     public static String createToken(String key) throws Exception {
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
         String token = UHOME + key + String.valueOf(new Date().getTime());
-        token = URLEncoder.encode(token, "UTF-8");
-        token = new String(md5.digest(token.getBytes("UTF-8")), "UTF-8");
+        token = DES.getMD5(token);
         return token;
     }
 
@@ -43,9 +41,10 @@ public class SecurityUtil {
      * @throws Exception 
      */
     public static SignEntity decodeSign(String sign) throws Exception {
-        //appId=435324&time=3254624234&token=asdasd
         SignEntity signEntity = new SignEntity();
         try {
+            sign = URLDecoder.decode(sign, "UTF-8");
+            //appId=435324&time=3254624234&token=asdasd
             String[] params = sign.split("&");
             signEntity.setAppId(params[0].split("=")[1]);
             signEntity.setTime(Long.parseLong(params[1].split("=")[1]));
