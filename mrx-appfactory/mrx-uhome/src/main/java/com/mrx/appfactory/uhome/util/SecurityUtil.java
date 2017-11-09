@@ -1,4 +1,4 @@
-﻿package com.mrx.appfactory.uhome.util;
+package com.mrx.appfactory.uhome.util;
 
 import java.net.URLDecoder;
 
