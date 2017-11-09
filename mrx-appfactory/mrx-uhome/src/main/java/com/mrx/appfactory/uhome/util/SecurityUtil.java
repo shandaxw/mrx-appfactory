@@ -1,7 +1,6 @@
 package com.mrx.appfactory.uhome.util;
 
 import java.net.URLDecoder;
-import java.util.Date;
 
 import com.mrx.appfactory.common.core.APIException;
 import com.mrx.appfactory.common.core.APIResults;
@@ -27,7 +26,7 @@ public class SecurityUtil {
      * @throws Exception 
      */
     public static String createToken(String key) throws Exception {
-        String token = UHOME + key + String.valueOf(new Date().getTime());
+        String token = UHOME + key;
         token = DES.getMD5(token);
         return token;
     }
@@ -55,7 +54,6 @@ public class SecurityUtil {
         }
         return signEntity;
     }
-
 }
 
 /**
