@@ -46,10 +46,10 @@
 			<properties>
 				<package.environment>dev</package.environment>
 				<package.warname>mrx-cfgtool</package.warname>
-				<server.url>http://119.23.105.36:8081</server.url>
+				<server.url></server.url>
 				<server.path>mrx-cfgtool</server.path>
-				<server.tomcatusername>account</server.tomcatusername>
-				<server.tomcatpassword>password</server.tomcatpassword>
+				<server.tomcatusername></server.tomcatusername>
+				<server.tomcatpassword></server.tomcatpassword>
 			</properties>
 		</profile>
 
@@ -58,10 +58,10 @@
 			<properties>
 				<package.environment>dev</package.environment>
 				<package.warname>mrx-uhome</package.warname>
-				<server.url>http://119.23.105.36:8082</server.url>
+				<server.url></server.url>
 				<server.path>mrx-uhome</server.path>
-				<server.tomcatusername>account</server.tomcatusername>
-				<server.tomcatpassword>password</server.tomcatpassword>
+				<server.tomcatusername></server.tomcatusername>
+				<server.tomcatpassword></server.tomcatpassword>
 			</properties>
 		</profile>
 
