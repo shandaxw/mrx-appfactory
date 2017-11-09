@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrx.appfactory.uhome.dao.IUhomeDao">
+
+	<select id="getUserInfo" parameterType="com.mrx.appfactory.uhome.entity.UserEntity"
+		resultType="com.mrx.appfactory.uhome.entity.UserEntity">
+		select ID,ACCOUNT,PASSWORD,NAME,SEX,PHONE,QQ from
+		t_user_info where
+		account=#{account,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getAppInfo" parameterType="java.lang.String"
+		resultType="com.mrx.appfactory.uhome.entity.AppEntity">
+		select ID,APP_ID appId,APP_NAME appName,TIME_RULE timeRule from
+		t_app_info where
+		APP_ID=#{appId,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

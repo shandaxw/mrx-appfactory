@@ -9,30 +9,31 @@ public class APIException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    private APIResults exception;
+    private int code;
 
     private String message;
 
     public APIException(APIResults exception) {
-        super(exception.getMessage());
-        this.exception = exception;
+        this.code = exception.getCode();
+        this.message = exception.getMessage();
     }
 
     public APIException(APIResults exception, String message) {
-        super(message);
-        this.exception = exception;
+        this.code = exception.getCode();
+        this.message = message;
     }
 
-    public APIResults getException() {
-        return exception;
+    public APIException(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public int getCode() {
+        return code;
     }
 
     public String getMessage() {
-        if (message != null) {
-            return message;
-        } else {
-            return exception.getMessage();
-        }
+        return message;
     }
 
 }

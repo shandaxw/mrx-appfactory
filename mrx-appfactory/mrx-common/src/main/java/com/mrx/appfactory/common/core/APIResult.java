@@ -25,17 +25,6 @@ public class APIResult {
         this.message = StringUtil.isNotBlank(message) ? message : apiResults.getMessage();
     }
 
-    public APIResult(APIException exception) {
-        this(exception.getException());
-    }
-
-    public APIResult(APIException exception, String message) {
-        this(exception);
-        if (StringUtil.isNotBlank(message)) {
-            this.message = message;
-        }
-    }
-
     public APIResult(int code, String message) {
         this.code = code;
         this.message = message;

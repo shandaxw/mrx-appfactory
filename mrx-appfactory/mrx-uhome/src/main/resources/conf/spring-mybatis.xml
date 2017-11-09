@@ -48,7 +48,7 @@
 
 	<!-- spring与mybatis整合配置，扫描所有dao -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:basePackage="com.mrx.appfactory.cfgtool.dao"
+		p:basePackage="com.mrx.appfactory.uhome.dao"
 		p:sqlSessionFactoryBeanName="sqlSessionFactory" />
 
 	<!-- 对数据源进行事务管理 -->
@@ -60,8 +60,9 @@
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
 
-	<context:component-scan base-package="com.mrx.appfactory.cfgtool.service">
+	<context:component-scan base-package="com.mrx.appfactory.uhome.service">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
+
 </beans>

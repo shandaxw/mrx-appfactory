@@ -35,7 +35,7 @@ public class BaseController {
         if (throwable instanceof APIException) {
             logger.info("APIEXCEPTION", throwable);
             APIException apiException = (APIException) throwable;
-            return new APIResult(apiException.getException(), apiException.getMessage());
+            return new APIResult(apiException.getCode(), apiException.getMessage());
         } else if (throwable instanceof DataAccessException) {
             logger.error("数据库异常", throwable);
             return new APIResult(APIResults.DATABASE_EXCEPTION,
