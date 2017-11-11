@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrx.appfactory.gobuild.dao.IGoBuildDao">
+
+	<select id="getCardInfo" parameterType="java.lang.String"
+		resultType="com.mrx.appfactory.gobuild.entity.CardEntity">
+		select USER_ID userId,USER_HEAD userHead,USER_MOTTO
+		userMotto,USER_ABOUT userAbout from
+		t_user_info where
+		USER_ID=#{userId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getHotPostList" parameterType="java.lang.String"
+		resultType="com.mrx.appfactory.gobuild.entity.PostEntity">
+		select ID,POST_NAME postName
+		from
+		t_post_info where
+		USER_ID=#{userId,jdbcType=VARCHAR}
+		ORDER BY
+		UPDATE_TIME
+		DESC LIMIT 3
+	</select>
+
+	<select id="getPostTotal" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(ID) from
+		t_post_info where
+		USER_ID=#{userId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getPostList" parameterType="com.mrx.appfactory.gobuild.entity.PageEntity"
+		resultType="com.mrx.appfactory.gobuild.entity.PostEntity">
+		select ID,USER_ID userId,POST_NAME
+		postName,POST_CONTENT
+		postContent,POST_IMG
+		postImg,UPDATE_TIME updateTime from
+		t_post_info
+		where
+		USER_ID=#{userId,jdbcType=VARCHAR}
+		limit
+		#{offset,jdbcType=NUMERIC},#{pageSize,jdbcType=NUMERIC}
+	</select>
+
+	<select id="getPostDetail" parameterType="java.lang.String"
+		resultType="com.mrx.appfactory.gobuild.entity.PostEntity">
+		select ID,USER_ID userId,POST_NAME
+		postName,POST_CONTENT
+		postContent,POST_IMG postImg,UPDATE_TIME updateTime from
+		t_post_info
+		where
+		ID=#{postId,jdbcType=NUMERIC}
+	</select>
+
+	<insert id="addMessage" parameterType="com.mrx.appfactory.gobuild.entity.MessageEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into t_message_info
+		<trim prefixOverrides="," suffixOverrides="," suffix=")" prefix="(">
+			USER_ID,MESSAGER,EMAIL,MESSAGE,
+		</trim>
+		<trim prefixOverrides="," suffixOverrides="," suffix=")" prefix="values (">
+			#{userId,jdbcType=VARCHAR},
+			#{messager,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{message,jdbcType=VARCHAR},
+		</trim>
+	</insert>
+
+</mapper>

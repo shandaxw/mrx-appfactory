@@ -49,6 +49,15 @@ public interface IUhomeService {
      */
     void refreshToken(String parameter) throws Exception;
 
+    /**
+     * 〈一句话功能简述〉用户登出
+     * 〈功能详细描述〉
+     *
+     * @param parameter
+     * @throws Exception 
+     */
+    void loginOut(String parameter) throws Exception;
+
 }
 
 /**

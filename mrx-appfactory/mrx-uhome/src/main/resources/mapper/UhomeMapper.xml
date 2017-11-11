@@ -6,7 +6,7 @@
 
 	<select id="getUserInfo" parameterType="com.mrx.appfactory.uhome.entity.UserEntity"
 		resultType="com.mrx.appfactory.uhome.entity.UserEntity">
-		select ID,ACCOUNT,PASSWORD,NAME,SEX,PHONE,QQ from
+		select ID,ACCOUNT,NAME,SEX,PHONE,QQ from
 		t_user_info where
 		account=#{account,jdbcType=VARCHAR}
 	</select>

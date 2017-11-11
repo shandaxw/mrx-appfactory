@@ -1,12 +1,11 @@
-package com.mrx.appfactory.uhome.util;
+package com.mrx.appfactory.gobuild.util;
 
 import java.net.URLDecoder;
 
 import com.mrx.appfactory.common.core.APIException;
 import com.mrx.appfactory.common.core.APIResults;
-import com.mrx.appfactory.common.util.Constants;
 import com.mrx.appfactory.common.util.DES;
-import com.mrx.appfactory.uhome.entity.SignEntity;
+import com.mrx.appfactory.gobuild.entity.SignEntity;
 
 /**
  * @Type SecurityUtil.java
@@ -16,6 +15,7 @@ import com.mrx.appfactory.uhome.entity.SignEntity;
  * @version 
  */
 public class SecurityUtil {
+    public final static String UHOME = "UHOME_";
 
     /**
      * 〈一句话功能简述〉生成token
@@ -26,7 +26,7 @@ public class SecurityUtil {
      * @throws Exception 
      */
     public static String createToken(String key) throws Exception {
-        String token = Constants.UHOME + key;
+        String token = UHOME + key;
         token = DES.getMD5(token);
         return token;
     }

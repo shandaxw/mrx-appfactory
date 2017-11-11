@@ -46,6 +46,21 @@ public class UhomeController extends UhomeBaseController {
     }
 
     /**
+     * 〈一句话功能简述〉用户登出
+     * 〈功能详细描述〉
+     *
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/loginOut", method = RequestMethod.POST)
+    public APIResult loginOut(HttpServletRequest request) throws Exception {
+        iUhomeService.loginOut(request.getParameter("sign"));
+        return APIResult.getResult(APIResults.SUCCESS);
+    }
+
+    /**
      * 〈一句话功能简述〉获取用户信息
      * 〈功能详细描述〉
      *

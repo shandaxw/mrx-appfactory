@@ -6,12 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mrx.appfactory.common.core.APIException;
 import com.mrx.appfactory.common.core.APIResults;
+import com.mrx.appfactory.common.util.Constants;
+import com.mrx.appfactory.common.util.RedisUtil;
 import com.mrx.appfactory.uhome.dao.IUhomeDao;
 import com.mrx.appfactory.uhome.entity.AppEntity;
 import com.mrx.appfactory.uhome.entity.SignEntity;
 import com.mrx.appfactory.uhome.entity.UserEntity;
 import com.mrx.appfactory.uhome.service.IUhomeService;
-import com.mrx.appfactory.uhome.util.RedisUtil;
 import com.mrx.appfactory.uhome.util.SecurityUtil;
 
 /**
@@ -46,7 +47,7 @@ public class UhomeImpl implements IUhomeService {
             throw new APIException(APIResults.FAILED, "密码不正确");
         }
         String token = SecurityUtil.createToken(userEntity.getAccount());
-        redisUtil.set(token, user);
+        redisUtil.set(token, user, Constants.EXPIRE_TIME);
         return token;
     }
 
@@ -91,10 +92,22 @@ public class UhomeImpl implements IUhomeService {
     public void refreshToken(String sign) throws Exception {
         SignEntity signEntity = SecurityUtil.decodeSign(sign);
         UserEntity userEntity = (UserEntity) redisUtil.get(signEntity.getToken());
-        if (userEntity == null||redisUtil.expire(signEntity.getToken())) {
+        if (userEntity == null || !redisUtil.expire(signEntity.getToken(), Constants.EXPIRE_TIME)) {
             throw new APIException(APIResults.FAILED, "未登录或token已过期");
         }
-        
+    }
+
+    /**
+     * 〈一句话功能简述〉用户登出
+     * 〈功能详细描述〉
+     *
+     * @param sign
+     * @throws Exception
+     */
+    @Override
+    public void loginOut(String sign) throws Exception {
+        SignEntity signEntity = SecurityUtil.decodeSign(sign);
+        redisUtil.delete(signEntity.getToken());
     }
 
 }

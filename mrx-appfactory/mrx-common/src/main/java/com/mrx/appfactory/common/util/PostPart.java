@@ -14,7 +14,7 @@ public class PostPart extends StringPart {
     }
 
     public PostPart(String name, String value) {
-        super(name, value, Constant.POST_CHARSET);
+        super(name, value, Constants.POST_CHARSET);
     }
 
 }
